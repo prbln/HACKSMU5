@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Revenue from "../Revenue";
 import MyRadar from "./MyRadar";
+import Notify from "../Notify";
 export const PredictiveAnalysis = (props) => {
   const [manufacturer, setManufacturer] = useState("");
   const [assetType, setAssetType] = useState("");
@@ -79,20 +80,6 @@ export const PredictiveAnalysis = (props) => {
           </FormControl>
 
           <FormControl fullWidth sx={{ margin: 1 }}>
-            <InputLabel>Asset Type</InputLabel>
-            <Select
-              value={assetType}
-              onChange={(e) => setAssetType(e.target.value)}
-            >
-              <MenuItem value={1}>Electric Panel</MenuItem>
-              <MenuItem value={2}>Air Conditioning System</MenuItem>
-              <MenuItem value={3}>HVAC</MenuItem>
-              <MenuItem value={4}>Plumbing System</MenuItem>
-              <MenuItem value={5}>Fire Alarm</MenuItem>
-            </Select>
-          </FormControl>
-
-          <FormControl fullWidth sx={{ margin: 1 }}>
             <InputLabel>Floor Number</InputLabel>
             <Select value={floorNumber} onChange={handleFloorChange}>
               {Array.from({ length: 19 }, (_, i) => (
@@ -124,6 +111,7 @@ export const PredictiveAnalysis = (props) => {
           >
             {display ? "Close" : "Submit"}
           </Button>
+          <Notify />
         </div>
       </Box>
       {display && (

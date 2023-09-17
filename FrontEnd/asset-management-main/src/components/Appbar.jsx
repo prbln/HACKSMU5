@@ -12,8 +12,11 @@ import ProfileIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Mail";
 import MiniDrawer from "./MiniDrawer";
 import { purple } from "@mui/material/colors";
+import React from "react";
+import Button from "@mui/material/Button";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
-export const AppBarComponent = () => {
+export const AppBarComponent = ({ loggedIn, setLoggedIn }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar>
@@ -55,6 +58,17 @@ export const AppBarComponent = () => {
             <Badge sx={{ cursor: "pointer" }} badgeContent={17} color="error">
               <ProfileIcon />
             </Badge>
+            <Button
+              variant="contained"
+              color="secondary"
+              bgcolor="rgb(48, 0, 143)"
+              onClick={() => {
+                setLoggedIn(!loggedIn);
+              }}
+              startIcon={<ExitToAppIcon />}
+            >
+              Logout
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
