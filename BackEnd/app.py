@@ -44,28 +44,6 @@ def connect_with_connector() -> create_engine:
     )
     return engine
 
-# app.config["SQLALCHEMY_DATABASE_URI"] = f'postgresql://postgres:buildpulse@34.29.40.7/BuildPulse'
-# print(app.config["SQLALCHEMY_DATABASE_URI"])
-# conn = Connector().connect('strategic-lens-399220:us-central1:build-pulse',"pg8000",
-#                            user='postgres', password='buildpulse', db='BuildPulse')
-# print(conn)
-# pool = sqlalchemy.create_engine("postgresql+pg8000://", creator=conn)
-# print(pool)
-# pool.connect()
-
-
-@app.route("/assets",methods=['GET'])
-def select_rows():
-    try:
-        engine = connect_with_connector()
-        query = text("SELECT * FROM asset;")
-        conn = engine.connect()
-        result = conn.execute(query).fetchall()
-        for i in range(len(result)):
-            result[i] = list(result[i])
-        return result
-    except Exception as err:
-        print(err)
 
 
 @app.route("/repairs", methods=['GET'])
@@ -98,6 +76,18 @@ def repairs():
     except Exception as err:
         print(err)
 
+@app.route("/assets",methods=['GET'])
+def select_rows():
+    try:
+        engine = connect_with_connector()
+        query = text("SELECT * FROM asset;")
+        conn = engine.connect()
+        result = conn.execute(query).fetchall()
+        for i in range(len(result)):
+            result[i] = list(result[i])
+        return result
+    except Exception as err:
+        print(err)
 
 @app.route("/count", methods=['GET'])
 def count():
@@ -130,4 +120,4 @@ def avg_cost():
 
 if __name__ == "__main__":
     # conn= getconn()
-    app.run(host="127.0.0.1", port=5000)
+    app.run(host="127.0.0.1", port=8002)
